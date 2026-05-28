@@ -1,0 +1,16 @@
+{
+  "name": "user-chat",
+  "version": "1.0.0",
+  "description": "web 开发的根基   阿里巴巴java代码规范\r 设计url的范式\r  协议：//  域名：端口   某台服务器的某个服务 资源 \r https：//localhost：3000/users\r https：//localhost：3000/books\r https：//localhost：3000/posts\r https：//localhost：3000/posts/：id  某篇文章",
+  "main": "index.js",
+  "scripts": {
+    "dev": "json-server --watch db.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.15"
+  }
+}
