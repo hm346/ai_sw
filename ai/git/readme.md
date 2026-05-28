@@ -30,4 +30,26 @@ ls
 
 文件 1：n 文件版本（快照）
 
+-git staus
+    仓库当前状态
+    常用，做任何git操作前，明确仓库状态
+-git add  readme.md
+    readme.md文件untracted
+    将一个未被仓库跟踪的文件，添加到暂存区（stage）
+    to be commited等待提交
+-git commit -m‘wrote a readme file’
+    存储的.git仓库中，有了第一个快照
+    2 insertinons 新增内容2行
+
+    -git 配置
+    git config  --global user.name" "
+    git config  --global email" "
+
+## reop 仓库
+
+    -remote origin 远程源
+    -remote push origin master/main
+
+
+
 
