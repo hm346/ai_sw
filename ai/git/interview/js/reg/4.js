@@ -1,4 +1,6 @@
 "hello-world".replace(
   /-(\w)/, 
-  (...args)=>{  console.log(args); return ''}
+  (...args)=>{  console.log(args); 
+    return ''
+}
 )

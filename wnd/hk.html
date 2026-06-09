@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 生日贺卡制作工坊</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #ff6b6b;
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #ee5a5a;
+            font-size: 18px;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .main-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            flex: 0 0 400px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #ff6b6b;
+            font-size: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 3px solid #ffe0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,107,107,0.2);
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.6);
+        }
+
+        .cards-section {
+            flex: 1;
+            background: rgba(255,255,255,0.3);
+            padding: 30px;
+            border-radius: 20px;
+            min-height: 600px;
+        }
+
+        .cards-title {
+            color: #c0392b;
+            font-size: 26px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cards-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .birthday-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.1),
+                inset 0 2px 0 rgba(255,255,255,0.8);
+            border: 3px solid #ffcccc;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+            transform-style: preserve-3d;
+            transition: all 0.3s;
+        }
+
+        .birthday-card:hover {
+            transform: translateY(-5px) rotateX(2deg);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.15),
+                inset 0 2px 0 rgba(255,255,255,0.8);
+        }
+
+        .birthday-card::before {
+            content: '🎂';
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 40px;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        .birthday-card::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            font-size: 30px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #ffcccc;
+        }
+
+        .card-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .card-age {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .card-message {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .card-hobby {
+            display: inline-block;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .card-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .card-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #c0392b;
+            font-size: 20px;
+            padding: 60px 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .form-section {
+                flex: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">🎉 生日贺卡制作工坊 🎉</h1>
+    <p class="page-subtitle">为你的朋友们制作专属的生日祝福贺卡吧！</p>
+    
+    <div class="main-container">
+        <div class="form-section">
+            <h2 class="section-title">📝 填写贺卡信息</h2>
+            
+            <div class="input-group">
+                <label>🎈 对方姓名</label>
+                <input type="text" id="name" placeholder="请输入姓名">
+            </div>
+
+            <div class="input-group">
+                <label>🎂 年龄</label>
+                <input type="number" id="age" placeholder="请输入年龄">
+            </div>
+
+            <div class="input-group">
+                <label>💝 兴趣爱好</label>
+                <input type="text" id="hobby" placeholder="例如：画画、打球、美食">
+            </div>
+
+            <button class="generate-btn" onclick="generateCard()">
+                🎁 生成生日贺卡
+            </button>
+        </div>
+
+        <div class="cards-section">
+            <h2 class="cards-title">🎨 我的贺卡收藏</h2>
+            <div class="cards-stack" id="cardsStack">
+                <div class="empty-state">
+                    ✨ 还没有贺卡哦，快去制作第一张吧！✨
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cards = [];
+
+        function generateCard() {
+            const name = document.getElementById('name').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const hobby = document.getElementById('hobby').value.trim();
+
+            if (!name || !age || !hobby) {
+                alert('❗ 请填写完整信息哦~');
+                return;
+            }
+
+            const templates = [
+                `祝${name}${age}岁生日快乐！🎉 愿你永远热爱${hobby}，天天开心，岁岁无忧！`,
+                `Happy Birthday to ${name}！${age}岁啦，继续在${hobby}的世界里闪闪发光吧～✨`,
+                `${name}生日快乐！${age}岁是超棒的年纪，愿${hobby}带给你无限快乐，平安顺遂！`,
+                `恭喜${name}迎来${age}岁生日！🥳 爱${hobby}的你一定超可爱，新一岁万事胜意！`,
+                `祝${name}${age}岁生日快乐！吃好喝好，${hobby}玩到尽兴，每天都幸福感爆棚！`
+            ];
+
+            const randomIndex = Math.floor(Math.random() * templates.length);
+            const message = templates[randomIndex];
+
+            const card = {
+                id: Date.now(),
+                name: name,
+                age: age,
+                hobby: hobby,
+                message: message,
+                timestamp: new Date().toLocaleString()
+            };
+
+            cards.unshift(card);
+            renderCards();
+
+            document.getElementById('name').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('hobby').value = '';
+        }
+
+        function renderCards() {
+            const stack = document.getElementById('cardsStack');
+            
+            if (cards.length === 0) {
+                stack.innerHTML = `
+                    <div class="empty-state">
+                        ✨ 还没有贺卡哦，快去制作第一张吧！✨
+                    </div>
+                `;
+                return;
+            }
+
+            stack.innerHTML = cards.map(card => `
+                <div class="birthday-card" id="card-${card.id}">
+                    <div class="card-header">
+                        <span class="card-name">${card.name}</span>
+                        <span class="card-age">${card.age}岁啦</span>
+                    </div>
+                    <div class="card-message">${card.message}</div>
+                    <div class="card-hobby">💖 爱好：${card.hobby}</div>
+                    <div class="card-actions">
+                        <button class="card-btn copy-btn" onclick="copyCard(${card.id})">
+                            📋 复制文案
+                        </button>
+                        <button class="card-btn delete-btn" onclick="deleteCard(${card.id})">
+                            🗑️ 删除
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyCard(id) {
+            const card = cards.find(c => c.id === id);
+            if (card) {
+                navigator.clipboard.writeText(card.message).then(() => {
+                    alert('✅ 贺卡文案已复制成功！');
+                });
+            }
+        }
+
+        function deleteCard(id) {
+            cards = cards.filter(c => c.id !== id);
+            renderCards();
+        }
+
+        renderCards();
+    </script>
+</body>
+</html>
